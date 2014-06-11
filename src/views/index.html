@@ -1,0 +1,18 @@
+<head>
+</head>
+
+<body>
+	Url: <input type="text" id="url">
+	<button id="submit">Submit!</button>
+	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript">
+	$("#submit").click(function() {
+		console.log("WORKED");
+		$.ajax({
+			type: "POST",
+			url: "_urlhandler",
+			data: "url=" + $("#url").val()
+		});	
+	});
+	</script>
+</body>
