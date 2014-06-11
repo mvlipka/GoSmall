@@ -12,6 +12,7 @@ type HtmlServe struct {
 	views     map[string][]byte
 }
 
+//Store the HTML in a map
 func (this *HtmlServe) CacheHtml() {
 	this.views = make(map[string][]byte)
 	dir, err := ioutil.ReadDir(this.Directory)
@@ -28,8 +29,5 @@ func (this *HtmlServe) CacheHtml() {
 }
 
 func (this *HtmlServe) Serve(w *http.ResponseWriter, fileName string) {
-	//view, _ := ioutil.ReadFile("view/index.html")
-	//io.WriteString(*w, string(view))
-	//
 	io.WriteString(*w, string(this.views[fileName]))
 }

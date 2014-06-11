@@ -1,18 +1,13 @@
 package main
 
 import (
+	"./frontend"
 	"fmt"
 	"github.com/garyburd/redigo/redis"
-	//"io"
-	//"io/ioutil"
-	"./frontend"
 	"math/rand"
 	"net/http"
-	//"strings"
 	"time"
 )
-
-var tokenValues = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
 func main() {
 	conn, err := redis.Dial("tcp", "localhost:6379")
@@ -63,6 +58,9 @@ func main() {
 	http.ListenAndServe(":80", nil)
 }
 
+//Accepted values to use in the shortened URL
+var tokenValues = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+
 func generateToken() string {
 	rand.Seed(int64(time.Now().Second()))
 	temp := ""
@@ -80,6 +78,6 @@ func validateUrl(url string) bool {
 	if url[:8] == "https://" {
 		result = true
 	}
-
+	//TODO: Convert to regex
 	return result
 }
